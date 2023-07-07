@@ -364,6 +364,9 @@ class Py3oReport(models.TransientModel):
 
     def create_report(self, res_ids, data):
         """Override this function to handle our py3o report"""
+        # Handling when `res_ids` is not propagated correctly.
+        if res_ids is None:
+            res_ids = data.get("context", {}).get("active_ids", [])
         model_instances = self.env[self.ir_actions_report_id.model].browse(res_ids)
         reports_path = []
         if len(res_ids) > 1 and self.ir_actions_report_id.py3o_multi_in_one:
