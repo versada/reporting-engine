@@ -12,7 +12,13 @@ from unittest import mock
 
 import pkg_resources
 from PyPDF2 import PdfFileWriter
-from PyPDF2.pdf import PageObject
+
+try:
+    from PyPDF2.pdf import PageObject
+# If python > 3.10, odoo installs PyPDF2==2.12.1 and it no longer has
+# PyPDF2.pdf module.
+except ModuleNotFoundError:
+    from PyPDF2 import PageObject
 
 from odoo import tools
 from odoo.exceptions import ValidationError
