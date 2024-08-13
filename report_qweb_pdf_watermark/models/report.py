@@ -1,14 +1,23 @@
 # © 2016 Therp BV <http://therp.nl>
 # Copyright 2023 Onestein - Anjeel Haria
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import os
 from base64 import b64decode
 from io import BytesIO
 from logging import getLogger
 
 from PIL import Image
+from PyPDF2 import PdfFileReader, PdfFileWriter
 
 from odoo import api, fields, models
 from odoo.tools.safe_eval import safe_eval
+
+try:
+    # py > 3.10
+    from PyPDF2.errors import PdfReadError
+except ImportError:
+    # py <= 3.10
+    from PyPDF2.utils import PdfReadError
 
 logger = getLogger(__name__)
 
@@ -17,12 +26,6 @@ try:
     from PIL import PdfImagePlugin  # noqa: F401
 except ImportError:
     logger.error("ImportError: The PdfImagePlugin could not be imported")
-
-try:
-    from PyPDF2 import PdfFileReader, PdfFileWriter  # pylint: disable=W0404
-    from PyPDF2.utils import PdfReadError  # pylint: disable=W0404
-except ImportError:
-    logger.debug("Can not import PyPDF2")
 
 
 class Report(models.Model):
@@ -108,11 +111,29 @@ class Report(models.Model):
             return result
 
         pdf = PdfFileWriter()
-        pdf_watermark = None
+
         try:
             pdf_watermark = PdfFileReader(BytesIO(watermark))
         except PdfReadError:
-            # let's see if we can convert this with pillow
+            pdf_watermark = None
+        except UnicodeDecodeError:
+            # workaround: handle case of unintentional pypdf `UnicodeDecodeError`
+            # because odoo enforces `strict` mode
+            # https://github.com/versada/odoo/blob/d83bd4f/odoo/tools/pdf.py#L27
+            # and `pypdf` validation may can raise the error when generating message
+            # https://github.com/py-pdf/pypdf/blob/2.x/PyPDF2/_reader.py#L1455
+            stream = BytesIO(watermark)
+            stream.seek(0, os.SEEK_SET)
+            header_byte = stream.read(5)
+            if header_byte != b"%PDF-":
+                # the file is not PDF -- probably this is image (we'll check bellow)
+                pdf_watermark = None
+            else:
+                # if file is PDF -- show the error (no idea where it may come from)
+                raise
+
+        if pdf_watermark is None:
+            # probably this is image
             try:
                 Image.init()
                 image = Image.open(BytesIO(watermark))
