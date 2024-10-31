@@ -8,9 +8,9 @@ import shutil
 import tempfile
 from base64 import b64decode, b64encode
 from contextlib import contextmanager
+from importlib.resources import as_file, files
 from unittest import mock
 
-import pkg_resources
 from PyPDF2 import PdfFileWriter
 from PyPDF2.pdf import PageObject
 
@@ -45,7 +45,7 @@ def temporary_copy(path):
 
 class TestReportPy3o(TransactionCase):
     def setUp(self):
-        super(TestReportPy3o, self).setUp()
+        super().setUp()
         self.env.user.image_1920 = PNG
         self.report = self.env.ref("report_py3o.res_users_report_py3o")
         self.py3o_report = self.env["py3o.report"].create(
@@ -146,10 +146,9 @@ class TestReportPy3o(TransactionCase):
         # the demo template is specified with a relative path in in the module
         # path
         tmpl_name = self.report.py3o_template_fallback
-        flbk_filename = pkg_resources.resource_filename(
-            "odoo.addons.%s" % self.report.module, tmpl_name
-        )
-        self.assertTrue(os.path.exists(flbk_filename))
+        with as_file(files(f"odoo.addons.{self.report.module}")) as _asf:
+            flbk_filename = _asf.joinpath(tmpl_name)
+        self.assertTrue(flbk_filename.is_file())
         res = self.report._render(self.report.id, self.env.user.ids)
         self.assertTrue(res)
         # The generation fails if the template is not found
@@ -190,9 +189,8 @@ class TestReportPy3o(TransactionCase):
     @tools.misc.mute_logger("odoo.addons.report_py3o.models.py3o_report")
     def test_report_template_fallback_validity(self):
         tmpl_name = self.report.py3o_template_fallback
-        flbk_filename = pkg_resources.resource_filename(
-            "odoo.addons.%s" % self.report.module, tmpl_name
-        )
+        with as_file(files(f"odoo.addons.{self.report.module}")) as _asf:
+            flbk_filename = _asf.joinpath(tmpl_name)
         # an exising file in a native format is a valid template if it's
         self.assertTrue(self.py3o_report._get_template_from_path(tmpl_name))
         self.report.module = None
@@ -234,7 +232,7 @@ class TestReportPy3o(TransactionCase):
         self.env["ir.config_parameter"].set_param(
             PY3O_CONVERSION_COMMAND_PARAMETER, "/wrong_path"
         )
-        self.report.refresh()
+        self.report.invalidate_recordset()
         # no bin path available but the report is still available since
         # the output is into native format
         self.assertFalse(self.report.lo_bin_path)
@@ -255,7 +253,7 @@ class TestReportPy3o(TransactionCase):
         self.env["ir.config_parameter"].set_param(
             PY3O_CONVERSION_COMMAND_PARAMETER, "libreoffice"
         )
-        self.report.refresh()
+        self.report.invalidate_recordset()
         self.assertTrue(self.report.lo_bin_path)
         self.assertFalse(self.report.is_py3o_native_format)
         self.assertFalse(self.report.is_py3o_report_not_available)

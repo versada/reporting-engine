@@ -30,7 +30,7 @@ def display_address(address_record, without_company=False):
     return address_record.display_address(without_company=without_company)
 
 
-class Py3oParserContext(object):
+class Py3oParserContext:
     def __init__(self, env):
         self._env = env
 
@@ -136,4 +136,4 @@ class Py3oParserContext(object):
                 no_break_space=True,
             )
 
-        return self._format_date(self._env, value)
+        return self._format_date(value)
