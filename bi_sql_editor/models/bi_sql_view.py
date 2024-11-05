@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from psycopg2 import ProgrammingError
 
@@ -162,7 +162,31 @@ class BiSQLView(models.Model):
     model_id = fields.Many2one(
         string="Odoo Model", comodel_name="ir.model", readonly=True
     )
+    # UI related fields
+    # 1. Editable fields, which can be set by the user (optional) before
+    # creating the UI elements
 
+    @api.model
+    def _default_parent_menu_id(self):
+        return self.env.ref("bi_sql_editor.menu_bi_sql_editor")
+
+    parent_menu_id = fields.Many2one(
+        string="Parent Odoo Menu",
+        comodel_name="ir.ui.menu",
+        required=True,
+        readonly=True,
+        default=lambda self: self._default_parent_menu_id(),
+        states={
+            "draft": [("readonly", False)],
+            "sql_valid": [("readonly", False)],
+            "model_valid": [("readonly", False)],
+        },
+        help="By assigning a value to this field before manually creating the "
+        "UI, you're overwriting the parent menu on which the menu related to "
+        "the SQL report will be created.",
+    )
+
+    # 2. Readonly fields, non editable by the user
     tree_view_id = fields.Many2one(
         string="Odoo Tree View", comodel_name="ir.ui.view", readonly=True
     )
@@ -430,7 +454,7 @@ class BiSQLView(models.Model):
             "numbercall": -1,
             "interval_number": 1,
             "interval_type": "days",
-            "nextcall": datetime(now.year, now.month, now.day + 1),
+            "nextcall": now + timedelta(days=1),
             "active": True,
         }
 
@@ -450,7 +474,7 @@ class BiSQLView(models.Model):
             "type": "tree",
             "model": self.model_id.model,
             "arch": """<?xml version="1.0"?>"""
-            """<tree string="Analysis">{}"""
+            """<tree name="Analysis">{}"""
             """</tree>""".format(
                 "".join([x._prepare_tree_field() for x in self.bi_sql_view_field_ids])
             ),
@@ -540,7 +564,7 @@ class BiSQLView(models.Model):
         self.ensure_one()
         return {
             "name": self.name,
-            "parent_id": self.env.ref("bi_sql_editor.menu_bi_sql_editor").id,
+            "parent_id": self.parent_menu_id.id,
             "action": "ir.actions.act_window,%s" % self.action_id.id,
             "sequence": self.sequence,
         }

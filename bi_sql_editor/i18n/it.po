@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-12 02:51+0000\n"
-"PO-Revision-Date: 2017-08-12 02:51+0000\n"
-"Last-Translator: Paolo Valier <paolo.valier@hotmail.it>, 2017\n"
+"PO-Revision-Date: 2023-06-20 11:08+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: bi_sql_editor
 #: code:addons/bi_sql_editor/models/bi_sql_view.py:0
@@ -89,6 +90,14 @@ msgstr ""
 #. module: bi_sql_editor
 #: model:ir.model,name:bi_sql_editor.model_bi_sql_view_field
 msgid "Bi SQL View Field"
+msgstr ""
+
+#. module: bi_sql_editor
+#: model:ir.model.fields,help:bi_sql_editor.field_bi_sql_view__parent_menu_id
+msgid ""
+"By assigning a value to this field before manually creating the UI, you're "
+"overwriting the parent menu on which the menu related to the SQL report will "
+"be created."
 msgstr ""
 
 #. module: bi_sql_editor
@@ -189,7 +198,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:bi_sql_editor.field_bi_sql_view_field__display_name
 #: model:ir.model.fields,field_description:bi_sql_editor.field_ir_model_fields__display_name
 msgid "Display Name"
-msgstr "Nome da visualizzare"
+msgstr "Nome visualizzato"
 
 #. module: bi_sql_editor
 #: model:ir.model.fields,field_description:bi_sql_editor.field_bi_sql_view__domain_force
@@ -416,6 +425,11 @@ msgid "Open View"
 msgstr ""
 
 #. module: bi_sql_editor
+#: model:ir.model.fields,field_description:bi_sql_editor.field_bi_sql_view__parent_menu_id
+msgid "Parent Odoo Menu"
+msgstr ""
+
+#. module: bi_sql_editor
 #: model_terms:ir.ui.view,arch_db:bi_sql_editor.view_bi_sql_view_form
 msgid "Preview SQL Expression"
 msgstr ""
@@ -519,7 +533,7 @@ msgstr ""
 #. module: bi_sql_editor
 #: model_terms:ir.ui.view,arch_db:bi_sql_editor.view_bi_sql_view_form
 msgid "Set to Draft"
-msgstr "Imposta a Bozza"
+msgstr "Imposta a bozza"
 
 #. module: bi_sql_editor
 #: model:ir.model.fields,help:bi_sql_editor.field_bi_sql_view__size
@@ -585,6 +599,16 @@ msgid ""
 "Type of the Odoo field that will be created. Keep empty if you don't want to "
 "create a new field. If empty, this field will not be displayed neither "
 "available for search or group by function"
+msgstr ""
+
+#. module: bi_sql_editor
+#: model_terms:ir.ui.view,arch_db:bi_sql_editor.view_bi_sql_view_form
+msgid "UI Instances"
+msgstr ""
+
+#. module: bi_sql_editor
+#: model_terms:ir.ui.view,arch_db:bi_sql_editor.view_bi_sql_view_form
+msgid "UI Parameters"
 msgstr ""
 
 #. module: bi_sql_editor

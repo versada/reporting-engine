@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-10-26 16:43+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2024-05-23 09:35+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: report_async
 #: model:mail.template,body_html:report_async.async_report_delivery
@@ -71,8 +71,8 @@ msgid ""
 "            "
 msgstr ""
 "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-"
-"color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width:"
-" 100%; border-collapse:separate;\">\n"
+"color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; "
+"width: 100%; border-collapse:separate;\">\n"
 "                    <tr>\n"
 "                        <td align=\"center\">\n"
 "                            <table border=\"0\" cellpadding=\"0\" "
@@ -86,28 +86,28 @@ msgstr ""
 "\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-"
 "color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
 "                                                <tr>\n"
-"                                                    <td valign=\"top\" style"
-"=\"font-size: 13px;\">\n"
-"                                        % set base_url_async = object.env['ir"
-".config_parameter'].sudo().get_param('web.base.url.async_reports')\n"
+"                                                    <td valign=\"top\" style="
+"\"font-size: 13px;\">\n"
+"                                        % set base_url_async = object."
+"env['ir.config_parameter'].sudo().get_param('web.base.url.async_reports')\n"
 "                                        % set base_url = base_url_async or "
 "object.env['ir.config_parameter'].sudo().get_param('web.base.url')\n"
 "                                        % set download_url = '%s/web/content/"
-"ir.attachment/%s/datas/%s?download=true' % (base_url, object.id, "
-"object.name, )\n"
+"ir.attachment/%s/datas/%s?download=true' % (base_url, object.id, object."
+"name, )\n"
 "                                        <div>\n"
-"                                            Gentile ${"
-"object.create_uid.partner_id.name or ''},\n"
+"                                            Gentile ${object.create_uid."
+"partner_id.name or ''},\n"
 "                                            <br/><br/>\n"
 "                                            la stampa che hai richiesto, "
 "${object.name}, è disponibile per il <b>\n"
-"                                                                <a href=\""
-"${download_url}\">download</a>\n"
+"                                                                <a href="
+"\"${download_url}\">download</a>\n"
 "                                                            </b>.\n"
 "                                            <br/><br/>\n"
 "                                            Buona giornata!<br/>\n"
-"                                            --<br/>${object.company_id.name}"
-"\n"
+"                                            --<br/>${object.company_id."
+"name}\n"
 "                                        </div>\n"
 "                                    </td>\n"
 "                                                </tr>\n"
@@ -129,7 +129,7 @@ msgstr "Azione finestra"
 #. module: report_async
 #: model:ir.model.fields,field_description:report_async.field_report_async__allow_async
 msgid "Allow Async"
-msgstr "Permetti Asincrono"
+msgstr "Permetti asincrono"
 
 #. module: report_async
 #: model_terms:ir.ui.view,arch_db:report_async.async_act_report_xml_view
@@ -212,7 +212,7 @@ msgstr "Abbandona"
 #: model:ir.model.fields,field_description:report_async.field_queue_job__display_name
 #: model:ir.model.fields,field_description:report_async.field_report_async__display_name
 msgid "Display Name"
-msgstr "Nome da visualizzare"
+msgstr "Nome visualizzato"
 
 #. module: report_async
 #: model:ir.model.fields,field_description:report_async.field_print_report_wizard__reference
@@ -229,12 +229,12 @@ msgstr "Fatto"
 #: code:addons/report_async/static/src/xml/report_async.xml:0
 #, python-format
 msgid "Email Address"
-msgstr "Indirizzo email"
+msgstr "Indirizzo e-mail"
 
 #. module: report_async
 #: model:ir.model.fields,field_description:report_async.field_report_async__email_notify
 msgid "Email Notification"
-msgstr "Notifica email"
+msgstr "Notifica e-mail"
 
 #. module: report_async
 #. openerp-web
@@ -285,7 +285,7 @@ msgstr "File"
 #: model_terms:ir.ui.view,arch_db:report_async.view_report_async_form
 #: model_terms:ir.ui.view,arch_db:report_async.view_report_async_tree
 msgid "Files"
-msgstr "Files"
+msgstr "File"
 
 #. module: report_async
 #: model:ir.model.fields,field_description:report_async.field_report_async__group_ids
@@ -309,7 +309,7 @@ msgstr "Lavoro"
 #. module: report_async
 #: model:ir.model.fields,field_description:report_async.field_report_async__job_info
 msgid "Job Info"
-msgstr "Info Lavoro"
+msgstr "Info lavoro"
 
 #. module: report_async
 #: model:ir.model.fields,field_description:report_async.field_report_async__job_status
@@ -437,7 +437,7 @@ msgstr "Stampa documento"
 #. module: report_async
 #: model:ir.model,name:report_async.model_print_report_wizard
 msgid "Print Report Wizard"
-msgstr "Wizard stampa"
+msgstr "Procedura guidata stampa resoconto"
 
 #. module: report_async
 #: model:ir.model,name:report_async.model_queue_job
@@ -449,35 +449,34 @@ msgstr "Lavoro in coda"
 #: code:addons/report_async/static/src/js/components/action_menus.js:0
 #, python-format
 msgid "Report"
-msgstr "Stampa"
+msgstr "Resoconto"
 
 #. module: report_async
 #: model:ir.model,name:report_async.model_ir_actions_report
 msgid "Report Action"
-msgstr "Azione stampa"
+msgstr "Azione resoconto"
 
 #. module: report_async
 #: model:ir.model,name:report_async.model_report_async
 msgid "Report Async"
-msgstr "Stampa asincrona"
+msgstr "Resoconto asincrono"
 
 #. module: report_async
 #: model:ir.actions.act_window,name:report_async.action_report_async
 #: model:ir.ui.menu,name:report_async.menu_report_async
 #: model_terms:ir.ui.view,arch_db:report_async.view_report_async_search
-#: model_terms:ir.ui.view,arch_db:report_async.view_report_async_tree
 msgid "Report Center"
-msgstr "Centro stampe"
+msgstr "Centro resoconti"
 
 #. module: report_async
 #: model:ir.actions.act_window,name:report_async.action_view_files
 msgid "Report Files"
-msgstr "Files stampe"
+msgstr "File resoconti"
 
 #. module: report_async
 #: model:ir.model.fields,field_description:report_async.field_print_report_wizard__action_report_id
 msgid "Report Template"
-msgstr "Modello stampa"
+msgstr "Modello resoconto"
 
 #. module: report_async
 #: model:ir.model.fields,field_description:report_async.field_report_async__action_id
@@ -494,12 +493,12 @@ msgstr "Lancia in background"
 #: model_terms:ir.ui.view,arch_db:report_async.view_report_async_form
 #: model_terms:ir.ui.view,arch_db:report_async.view_report_async_tree
 msgid "Run Now"
-msgstr "Lancia ora"
+msgstr "Esegui adesso"
 
 #. module: report_async
 #: model_terms:ir.actions.act_window,help:report_async.action_report_async
 msgid "Run reports asyncronously"
-msgstr "Lancia stampe asincronicamente"
+msgstr "Esegui resoconti in modo asincrono"
 
 #. module: report_async
 #. openerp-web
@@ -511,7 +510,7 @@ msgstr "Salva l'allegato nei record"
 #. module: report_async
 #: model:ir.model.fields,help:report_async.field_report_async__email_notify
 msgid "Send email with link to report, when it is ready"
-msgstr "Invia una mail con il link alla stampa, quando è pronta"
+msgstr "Invia una e-mail con il link al resoconto, quando è pronto"
 
 #. module: report_async
 #: model:ir.model.fields.selection,name:report_async.selection__report_async__job_status__started
@@ -530,7 +529,7 @@ msgid ""
 "                        Please contact your system administrator."
 msgstr ""
 "L'ultimo <i class=\"fa fa-cogs\"/> <b>lavoro lanciato</b> è fallito.\n"
-"                        Contatta il tuo amministratore di sistema."
+"                        Contattare l'amministratore di sistema."
 
 #. module: report_async
 #: model_terms:ir.ui.view,arch_db:report_async.view_report_async_form
@@ -541,8 +540,8 @@ msgid ""
 msgstr ""
 "L'ultimo <i class=\"fa fa-cogs\"/> <b>lavoro lanciato</b> è andato a buon "
 "fine.\n"
-"                        Puoi verificare il risultato nei <i class=\"fa fa-"
-"copy\"/><b> Files</b>"
+"                        Si può verificare il risultato nei <i class=\"fa fa-"
+"copy\"/><b> file</b>"
 
 #. module: report_async
 #: model_terms:ir.ui.view,arch_db:report_async.view_report_async_form
@@ -551,9 +550,9 @@ msgid ""
 "                        <b>job</b>, and will be available at\n"
 "                        <i class=\"fa fa-copy\"/><b> Files</b>"
 msgstr ""
-"La stampa verrà eseguita in un <i class=\"fa fa-cogs\"/>\n"
+"Il resoconto verrà eseguito in un <i class=\"fa fa-cogs\"/>\n"
 "                        <b>lavoro</b>, e sarà disponibile nei\n"
-"                        <i class=\"fa fa-copy\"/><b> Files</b>"
+"                        <i class=\"fa fa-copy\"/><b> file</b>"
 
 #. module: report_async
 #: model:ir.model.fields,help:report_async.field_report_async__allow_async
@@ -561,13 +560,13 @@ msgid ""
 "This is not automatic field, please check if you want to allow this report "
 "in background process"
 msgstr ""
-"Questo non è un campo automatico, controlla se vuoi permettere questa stampa "
-"nel processo in background"
+"Questo non è un campo automatico, controllare se si vuole permettere quest "
+"resoconto nel processo in background"
 
 #. module: report_async
 #: model:mail.template,subject:report_async.async_report_delivery
 msgid "Your report is available, ${object.name}"
-msgstr "La tua stampa è pronta, ${object.name}"
+msgstr "Il tuo resoconto è ponto, ${object.name}"
 
 #. module: report_async
 #. openerp-web
